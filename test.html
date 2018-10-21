@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Client Side</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+
+    <script type="application/javascript">
+
+        function load() {
+            var table = $('#table');
+            var myData = $.get("http://c64a3068.ngrok.io/blocks", function (data) {
+                var sent = data.split(';');
+                for(var p = 0 ; p<sent.length-1; p++)
+                {
+                   console.log("Get call successful" + JSON.stringify(data));
+                   var arr = sent[p].split(','); 
+                   console.log(arr[0]);
+                   if(arr[1] == '0')   
+                   {
+                    $('<tr>').html("<td> <input type=\"checkbox\">" + "&nbsp&nbsp" + arr[0] +  "</td>").appendTo('#table');
+                   }
+                   else{
+                    $('<tr>').html("<td> <input type=\"checkbox\" checked>" + "&nbsp&nbsp" + arr[0] +  "</td>").appendTo('#table');
+                   }
+                }
+
+            })
+                .fail(function () {
+                    console.log("Get call failed");
+                })
+                .always(function () {
+                    console.log("Get call was made for devices");
+                });
+        }
+        window.onload = load();
+
+          function request()
+        {
+            var xhr = new XMLHttpRequest();
+            var url = "http://c64a3068.ngrok.io/mineBlock";
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var json = JSON.parse(xhr.responseText);
+                    console.log(json.data + ", " + json.checked);
+                }
+            };
+            var data = JSON.stringify({"data" : $(".inp").val(),"checked":"0"});
+            xhr.send(data);
+            window.location.reload();
+        }
+
+        function addMore(){
+          var inps = $('#wrapper > div:last').data('count')+1 || 0;
+          $('#wrapper').append('<div data-count="'+inps+'"><br><input style="margin-left:10.4%" type=text id="count'+inps+'" class="inp"> : Add task here</input></div>');
+        }
+
+        $('#wrapper').on('click' , 'a.remove' ,function(){
+          $(this).closest('div').remove();
+        });
+    </script>
+</head>
+<body style="background-color: orange;>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <br>
+            <div class="container">
+                <center><h1 style="color:Red">
+                    Client Side
+                </h1></center>
+
+                
+
+                <br>
+                <br>
+                <div class="container">
+                    <table id="table" class="table table-striped table-bordered table-hover table-condensed"
+                           data-height="460">
+                        <thead>
+                        <tr>
+                            <th data-field="deviceId">To-Do List (Add Task to To-Do list by pressing Add To-Do Button)</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+
+                <!--<p>
+                    <a class="btn btn-primary btn-large" href="#">Learn more</a>
+                </p>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+    <button class="btn btn-primary btn-lg" id = "request" onclick="request()" style = "margin-left: 10.4%;">Send Request</button>
+
+    &nbsp&nbsp
+    <button class="btn btn-primary btn-lg" id=add onclick="addMore()">Add To-Do</button>
+
+    <div id=wrapper>
+    </div>
+
+
+<div id="mapid"></div>
+
+
+</body>
+</html>
