@@ -6,10 +6,10 @@
 ### It provides Blockchain solution to solve Management issues in Construction industry
 
 
-#### This solution will help the industry to:
+
 
 <img src="project_idea.png" alt="Our Project Idea Gist"/>
-
+#### This solution will help the industry to:
 <ul>
   <li>Efficient task updates for logistic and supply chain management</li>
   <li>Prevent repeated tasks and reduce time needed for reporting progress</li>
