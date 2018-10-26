@@ -3,7 +3,7 @@
 ## This Repository was born out of a Hackathon
 
 
-### It provides Blockchain solution to solve Management issues in Construction industry
+### It provides Blockchain solution to solve Supply Chain Management issues in Construction industry
 
 
 
