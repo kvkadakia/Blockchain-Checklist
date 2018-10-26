@@ -8,7 +8,7 @@
 
 #### This solution will help the industry to:
 
-<img src="project_idea.jpg" alt="Our Project Idea Gist"/>
+<img src="project_idea.png" alt="Our Project Idea Gist"/>
 
 <ul>
   <li>Efficient task updates for logistic and supply chain management</li>
